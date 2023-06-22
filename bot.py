@@ -1,5 +1,7 @@
 import discord
 import responses
+from dotenv import load_dotenv
+import os
 
 async def send_message(message, user_message, is_private):
     try:
@@ -10,10 +12,11 @@ async def send_message(message, user_message, is_private):
         print(e)
         
 def run_discord_bot():
-    TOKEN = 'MTExNzk2OTkxMjc0OTY0MTc1OA.GZMBVN.naD7PL-55LUs50GV3NmeR0DsfIC82OCUx4uJ0I'
-    TARGET_USER_ID = [780933023620268042]
-    TARGET_VOICE_CHANNEL_ID = 871828353374621706
-    TARGET_TEXT_CHANNEL_ID = 879940992013332521
+    load_dotenv()
+    TOKEN = os.getenv('TOKEN')
+    TARGET_USER_ID = os.getenv('SAMS_USER')
+    TARGET_VOICE_CHANNEL_ID = os.getenv('TARGET_VOICE_CHANNEL_ID')
+    TARGET_TEXT_CHANNEL_ID = os.getenv('TARGET_TEXT_CHANNEL_ID')
     intents = discord.Intents.default()  # Create a default intents object
     intents.message_content = True  # Disable typing events if you don't need them
     client = discord.Client(intents=intents)
